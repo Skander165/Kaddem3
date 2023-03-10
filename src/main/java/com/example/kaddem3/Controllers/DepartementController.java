@@ -12,7 +12,6 @@ import java.util.List;
 @RequestMapping("departement")
 @RequiredArgsConstructor
 public class DepartementController {
-    @Autowired
     private final IDepartementService _iDepartementService;
 
     @GetMapping()

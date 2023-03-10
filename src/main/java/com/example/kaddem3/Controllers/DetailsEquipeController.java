@@ -13,7 +13,6 @@ import java.util.List;
 @RequestMapping("detailequipe")
 @RequiredArgsConstructor
 public class DetailsEquipeController {
-    @Autowired
     private final IDetailsEquipeService _iDetailsEquipeServices;
 
     @GetMapping()

@@ -1,18 +1,24 @@
 package com.example.kaddem3.Services;
 
 import com.example.kaddem3.Models.Contrat;
+import com.example.kaddem3.Models.Equipe;
+import com.example.kaddem3.Models.Etudiant;
 import com.example.kaddem3.Repository.ContractRepository;
+import com.example.kaddem3.Repository.EtudiantRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 
+import java.util.ArrayList;
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class ContractService implements IContractService {
-    @Autowired
     private final ContractRepository _contractRepository;
+    private final EtudiantRepository _etudiantRepository;
 
     @Override
     public void addContract(Contrat c) {
@@ -38,6 +44,23 @@ public class ContractService implements IContractService {
     @Override
     public void deleteContract(Integer id) {
         _contractRepository.deleteById(id);
-
     }
+
+    @Override
+    @Transactional
+    public Contrat affectContratToEtudiant(Contrat ce, String nomE, String prenomE) {
+        //we used the method findbynomeandprenomE created in repository to get the nom and prenom of an etudiant
+        Etudiant etudiant = etudiantRepository.findByNomEAndPrenomE(nomE,prenomE);
+        Contrat contrat = contratRepository.findById(ce.getIdContrat()).orElse(null);
+        Assert.notNull(etudiant,"Etudiant 404 not found");
+        Assert.notNull(contrat,"Contrat 404 not found");
+        if (etudiant.getContrats().size() >= 5 ) {
+            return null;
+        }
+        etudiant.getContrats().add(contrat);
+        etudiantRepository.save(etudiant);
+        return contrat;
+    }
+
+
 }

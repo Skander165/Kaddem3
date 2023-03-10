@@ -10,7 +10,6 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class EquipeService implements IEquipeService{
-    @Autowired
     private final EquipeRepository _equipeRepository;
     @Override
     public void addEquipe(Equipe e) {

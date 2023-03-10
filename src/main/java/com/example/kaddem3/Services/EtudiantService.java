@@ -16,10 +16,11 @@ import org.springframework.util.Assert;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class EtudiantService implements IEtudiantService {
-    @Autowired
     private final EtudiantRepository _etudiantRepository;
     private final DepartmentRepository _departementRepository;
     private final ContractRepository _contratRepository;
@@ -74,5 +75,21 @@ public class EtudiantService implements IEtudiantService {
         _etudiantRepository.saveAndFlush(e);
         contrat.setEtudiant(e);
         return e;
+    }
+
+    @Override
+    public List<Etudiant> getEtudiantsByDepartement(Integer idDepartement) {
+        Departement departement = departementRepository.findById(idDepartement).orElse(null);
+        Assert.isNull(departement ,"The departement is null ");
+        return departement.getEtudiants();
+    }
+
+    @Override
+    public Optional<Etudiant> findEtudiantByNomEAndPrenomE(String nom, String prenom) {
+        Optional<Etudiant> e = etudiantRepository.findEtudiantByNomEAndPrenomE(nom,prenom);
+        if(e == null)
+            return Optional.empty();
+        else
+            return e;
     }
 }

@@ -7,12 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("etudiant")
 @RequiredArgsConstructor
 public class EtudiantController {
-@Autowired
     private final IEtudiantService _iEtudiantService;
 
     @GetMapping()
@@ -38,5 +38,10 @@ public class EtudiantController {
     @PostMapping("{idContrat}/{idEquipe}")
     public Etudiant addAndAssignEtudiantToEquipeAndContract(@RequestBody Etudiant e, @PathVariable Integer idContrat, @PathVariable Integer idEquipe) {
         return _iEtudiantService.addAndAssignEtudiantToEquipeAndContract(e, idContrat, idEquipe);
+    }
+
+    @GetMapping("findEtudiantByNomAndPrenom/{nom}/{prenom}")
+    public Optional<Etudiant> findEtudiantByNomAndPrenom(@PathVariable("nom") String nom,@PathVariable("prenom") String prenom) {
+        return _iEtudiantService.findEtudiantByNomAndPrenom(nom,prenom);
     }
 }

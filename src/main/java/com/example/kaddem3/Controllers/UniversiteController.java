@@ -12,7 +12,6 @@ import java.util.List;
 @RequestMapping("universite")
 @RequiredArgsConstructor
 public class UniversiteController {
-    @Autowired
     private final IUniversiteService _iUniversiteService;
 
     @GetMapping("/getAllUniversite")

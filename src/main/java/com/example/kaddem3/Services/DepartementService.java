@@ -11,7 +11,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class DepartementService implements IDepartementService {
-    @Autowired
+
     private final DepartmentRepository _departmentRepository;
     @Override
     public void addDepartment(Departement d) {

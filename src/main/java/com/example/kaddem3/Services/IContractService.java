@@ -10,4 +10,5 @@ public interface IContractService {
     List<Contrat> getAllContracts();
     Contrat getContractById(Integer id);
     void deleteContract(Integer id);
+    Contrat affectContratToEtudiant (Contrat ce, String nom, String prenom);
 }

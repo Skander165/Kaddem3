@@ -10,7 +10,6 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class DetailsEquipeService implements IDetailsEquipeService{
-    @Autowired
     private final DetailsEquipeRepository _detailsEquipeRepository;
     @Override
     public void addDetailsEquipe(DetailsEquipe d) {

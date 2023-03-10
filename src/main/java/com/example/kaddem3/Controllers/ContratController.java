@@ -12,7 +12,6 @@ import java.util.List;
 @RequestMapping("contrat")
 @RequiredArgsConstructor
 public class ContratController {
-    @Autowired
     private final IContractService _iContractService;
 
     @GetMapping()
@@ -35,6 +34,11 @@ public class ContratController {
     private Contrat updateContract(@RequestBody Contrat contrat){
         _iContractService.updateContract(contrat);
         return contrat;
+    }
+
+    @PutMapping("/{nom}/{prenom}")
+    public Contrat affectContratToEtudiant(@RequestBody Contrat ce, @PathVariable("nom") String nom , @PathVariable("prenom") String prenom) {
+        return _iContractService.affectContratToEtudiant(ce ,nom ,prenom);
     }
 
 }

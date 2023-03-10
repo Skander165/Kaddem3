@@ -12,7 +12,6 @@ import java.util.List;
 @RequestMapping("equipe")
 @RequiredArgsConstructor
 public class EquipeController {
-    @Autowired
     private final IEquipeService _iEquipeServices;
     @GetMapping()
     public List<Equipe> getAllEquipe(){
