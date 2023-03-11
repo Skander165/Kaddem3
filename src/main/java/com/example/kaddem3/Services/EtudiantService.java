@@ -9,14 +9,12 @@ import com.example.kaddem3.Repository.DepartmentRepository;
 import com.example.kaddem3.Repository.EquipeRepository;
 import com.example.kaddem3.Repository.EtudiantRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -79,17 +77,17 @@ public class EtudiantService implements IEtudiantService {
 
     @Override
     public List<Etudiant> getEtudiantsByDepartement(Integer idDepartement) {
-        Departement departement = departementRepository.findById(idDepartement).orElse(null);
+        Departement departement = _departementRepository.findById(idDepartement).orElse(null);
         Assert.isNull(departement ,"The departement is null ");
         return departement.getEtudiants();
     }
 
     @Override
-    public Optional<Etudiant> findEtudiantByNomEAndPrenomE(String nom, String prenom) {
-        Optional<Etudiant> e = etudiantRepository.findEtudiantByNomEAndPrenomE(nom,prenom);
-        if(e == null)
-            return Optional.empty();
-        else
-            return e;
+    public Etudiant findByNomAndPrenom(String nom, String prenom) {
+        Etudiant e = _etudiantRepository.findByNomAndPrenom(nom,prenom);
+        Assert.isNull(e ,"Etudiant not found ");
+        return e;
+
+
     }
 }

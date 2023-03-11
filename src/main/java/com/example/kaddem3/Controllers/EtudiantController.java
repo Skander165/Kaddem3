@@ -3,11 +3,9 @@ package com.example.kaddem3.Controllers;
 import com.example.kaddem3.Models.Etudiant;
 import com.example.kaddem3.Services.IEtudiantService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("etudiant")
@@ -41,7 +39,7 @@ public class EtudiantController {
     }
 
     @GetMapping("findEtudiantByNomAndPrenom/{nom}/{prenom}")
-    public Optional<Etudiant> findEtudiantByNomAndPrenom(@PathVariable("nom") String nom,@PathVariable("prenom") String prenom) {
-        return _iEtudiantService.findEtudiantByNomAndPrenom(nom,prenom);
+    public Etudiant findEtudiantByNomAndPrenom(@PathVariable("nom") String nom,@PathVariable("prenom") String prenom) {
+        return _iEtudiantService.findByNomAndPrenom(nom,prenom);
     }
 }

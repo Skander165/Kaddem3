@@ -1,7 +1,6 @@
 package com.example.kaddem3.Services;
 
 import com.example.kaddem3.Models.Contrat;
-
 import java.util.List;
 
 public interface IContractService {
