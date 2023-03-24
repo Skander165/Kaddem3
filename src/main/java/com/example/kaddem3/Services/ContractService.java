@@ -9,6 +9,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import javax.transaction.Transactional;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -54,6 +57,20 @@ public class ContractService implements IContractService {
         _contractRepository.save(ce);
         etudiant.getContrats().add(ce);
         return ce;
+    }
+
+    @Override
+    public Integer nbContratsValides(LocalDate startDate, LocalDate endDate){
+        List<Contrat> total = _contractRepository.findByArchiveIsFalse();
+        List<Contrat> valides = new ArrayList<>();
+        for (Contrat c: total) {
+            if (!c.getDebutContrat().isAfter(endDate) && !c.getFinContrat().isBefore(startDate)) {
+                valides.add(c);
+            }
+        }
+        return valides.size();
+
+
     }
 
 

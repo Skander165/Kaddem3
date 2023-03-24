@@ -1,10 +1,14 @@
 package com.example.kaddem3.Services;
 
 import com.example.kaddem3.Models.Departement;
+import com.example.kaddem3.Models.Etudiant;
+import com.example.kaddem3.Models.Universite;
 import com.example.kaddem3.Repository.DepartmentRepository;
+import com.example.kaddem3.Repository.UniversiteRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 
 import java.util.List;
 
@@ -12,7 +16,9 @@ import java.util.List;
 @RequiredArgsConstructor
 public class DepartementService implements IDepartementService {
 
+
     private final DepartmentRepository _departmentRepository;
+    private final UniversiteRepository _universiteRepository;
     @Override
     public void addDepartment(Departement d) {
         _departmentRepository.save(d);
@@ -36,6 +42,13 @@ public class DepartementService implements IDepartementService {
     @Override
     public void deleteDepartment(Integer id) {
         _departmentRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Departement> retrieveDepartementsByUniversite(Integer idUniversite) {
+        Universite universite = _universiteRepository.findById(idUniversite).orElse(null);
+        Assert.isNull(universite, "Universite n'existe pas");
+        return universite.getDepartements();
     }
 }
 

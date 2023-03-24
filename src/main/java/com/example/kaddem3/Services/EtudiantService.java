@@ -75,11 +75,18 @@ public class EtudiantService implements IEtudiantService {
         return e;
     }
 
-    @Override
+    /*@Override
     public List<Etudiant> getEtudiantsByDepartement(Integer idDepartement) {
         Departement departement = _departementRepository.findById(idDepartement).orElse(null);
         Assert.isNull(departement ,"The departement is null ");
         return departement.getEtudiants();
+    }*/
+
+    @Override
+    public List<Etudiant> getEtudiantsByDepartement(Integer idDepartement) {
+        List<Etudiant> etudiants = _etudiantRepository.findByDepartementIdDepartement(idDepartement);
+        Assert.isNull(etudiants, "Pas d'etudiants pour ce departement");
+        return etudiants;
     }
 
     @Override
